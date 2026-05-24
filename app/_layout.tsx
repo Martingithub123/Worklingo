@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, ReactNode } from 'react';
 import { AppState, AppStateStatus } from 'react-native';
-import { Stack } from 'expo-router';
+import { Stack, useSegments, useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useFrameworkReady } from '@/hooks/useFrameworkReady';
 import { useFonts } from 'expo-font';
@@ -13,10 +13,31 @@ import {
 } from '@expo-google-fonts/poppins';
 import * as SplashScreen from 'expo-splash-screen';
 import { AppProvider } from '@/context/AppContext';
-import { AuthProvider } from '@/context/AuthContext';
+import { AuthProvider, useAuth } from '@/context/AuthContext';
 import { syncService } from '@/services/syncService';
 import { dataService } from '@/services/dataService';
 import { supabase } from '@/lib/supabase';
+
+const PROTECTED_SEGMENTS = new Set([
+  'learn', 'learn-lesson', 'jobs', 'sectors', 'roles',
+  'levels', 'training', 'quiz', 'result', 'settings', 'mode-select',
+]);
+
+function AuthGuard({ children }: { children: ReactNode }) {
+  const { user, loading } = useAuth();
+  const segments = useSegments();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (loading) return;
+    const current = segments[0] as string | undefined;
+    if (!user && current && PROTECTED_SEGMENTS.has(current)) {
+      router.replace('/welcome' as any);
+    }
+  }, [user, loading, segments]);
+
+  return <>{children}</>;
+}
 
 SplashScreen.preventAutoHideAsync();
 
@@ -64,12 +85,20 @@ export default function RootLayout() {
   return (
     <AuthProvider>
       <AppProvider>
+        <AuthGuard>
         <Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
           <Stack.Screen name="index" />
           <Stack.Screen name="welcome" options={{ animation: 'fade' }} />
           <Stack.Screen name="login" options={{ animation: 'slide_from_bottom' }} />
           <Stack.Screen name="signup" options={{ animation: 'slide_from_bottom' }} />
+          <Stack.Screen name="ui-language" options={{ animation: 'fade' }} />
+          <Stack.Screen name="referral" options={{ animation: 'fade' }} />
           <Stack.Screen name="language" options={{ animation: 'fade' }} />
+          <Stack.Screen name="settings" options={{ animation: 'slide_from_right' }} />
+          <Stack.Screen name="terms" options={{ animation: 'slide_from_right' }} />
+          <Stack.Screen name="mode-select" options={{ animation: 'slide_from_right' }} />
+          <Stack.Screen name="learn" options={{ animation: 'slide_from_right' }} />
+          <Stack.Screen name="learn-lesson" options={{ animation: 'slide_from_right' }} />
           <Stack.Screen name="jobs" options={{ animation: 'slide_from_right' }} />
           <Stack.Screen name="sectors" options={{ animation: 'slide_from_right' }} />
           <Stack.Screen name="roles" options={{ animation: 'slide_from_right' }} />
@@ -79,6 +108,7 @@ export default function RootLayout() {
           <Stack.Screen name="result" options={{ animation: 'slide_from_right' }} />
           <Stack.Screen name="+not-found" />
         </Stack>
+        </AuthGuard>
         <StatusBar style="light" />
       </AppProvider>
     </AuthProvider>

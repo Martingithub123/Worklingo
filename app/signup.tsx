@@ -1,20 +1,22 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
   View, Text, StyleSheet, TextInput, TouchableOpacity,
   KeyboardAvoidingView, Platform, ScrollView,
-  Animated, Dimensions,
+  Animated, Dimensions, Image,
 } from 'react-native';
 import { router } from 'expo-router';
 import { useAuth } from '@/context/AuthContext';
+import { useApp } from '@/context/AppContext';
+import { getStrings } from '@/constants/i18n';
 import { Radius, FontSize } from '@/constants/theme';
 import { Eye, EyeOff, Mail, Lock, User } from 'lucide-react-native';
-import BeeMascot from '@/components/BeeMascot';
 
 const { width, height } = Dimensions.get('window');
-const BEE_SIZE = width * 0.52;
 
 export default function SignUpScreen() {
   const { signUp } = useAuth();
+  const { uiLanguage } = useApp();
+  const t = getStrings(uiLanguage);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -55,6 +57,9 @@ export default function SignUpScreen() {
     if (!name.trim() || !email.trim() || !password.trim()) {
       setError('Please fill in all fields.'); return;
     }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setError('Please enter a valid email address.'); return;
+    }
     if (password.length < 8) {
       setError('Password must be at least 8 characters.'); return;
     }
@@ -62,7 +67,7 @@ export default function SignUpScreen() {
     const { error } = await signUp(email.trim(), password, name.trim());
     setLoading(false);
     if (error) setError(error);
-    else router.replace('/language' as any);
+    else router.replace('/ui-language' as any);
   };
 
   return (
@@ -90,12 +95,16 @@ export default function SignUpScreen() {
 
           {/* Bee mascot */}
           <Animated.View style={[styles.mascotWrapper, { opacity: mascotOp, transform: [{ scale: mascotSc }] }]}>
-            <BeeMascot size={BEE_SIZE} />
+            <Image
+              source={require('@/assets/images/bee-icon-new.png')}
+              style={{ width: width * 0.45, height: width * 0.45 }}
+              resizeMode="contain"
+            />
           </Animated.View>
 
           {/* Title */}
-          <Text style={styles.title}>BeeFluent</Text>
-          <Text style={styles.tagline}>Create your account and start buzzing!</Text>
+          <Text style={styles.title}>FluentBee</Text>
+          <Text style={styles.tagline}>{t.signUpTagline}</Text>
 
           {/* Form */}
           <Animated.View style={[styles.form, { opacity: formOp, transform: [{ translateY: formY }] }]}>
@@ -109,6 +118,7 @@ export default function SignUpScreen() {
                 onChangeText={setName}
                 autoCapitalize="words"
                 autoCorrect={false}
+                maxLength={100}
               />
             </View>
 
@@ -123,6 +133,7 @@ export default function SignUpScreen() {
                 autoCapitalize="none"
                 keyboardType="email-address"
                 autoCorrect={false}
+                maxLength={254}
               />
             </View>
 
@@ -137,6 +148,7 @@ export default function SignUpScreen() {
                 secureTextEntry={!showPass}
                 autoCapitalize="none"
                 autoCorrect={false}
+                maxLength={128}
               />
               <TouchableOpacity onPress={() => setShowPass(v => !v)}>
                 {showPass
@@ -155,7 +167,7 @@ export default function SignUpScreen() {
                 activeOpacity={0.85}
                 disabled={loading}
               >
-                <Text style={styles.primaryBtnText}>{loading ? 'CREATING ACCOUNT...' : 'CREATE ACCOUNT'}</Text>
+                <Text style={styles.primaryBtnText}>{loading ? t.creatingAccount : t.createAccountCta}</Text>
               </TouchableOpacity>
             </Animated.View>
 
@@ -165,7 +177,7 @@ export default function SignUpScreen() {
               onPress={() => router.replace('/login' as any)}
               activeOpacity={0.85}
             >
-              <Text style={styles.secondaryBtnText}>I ALREADY HAVE AN ACCOUNT</Text>
+              <Text style={styles.secondaryBtnText}>{t.alreadyHaveAccount}</Text>
             </TouchableOpacity>
           </Animated.View>
 
@@ -176,11 +188,11 @@ export default function SignUpScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#111111', alignItems: 'center' },
+  container: { flex: 1, backgroundColor: '#0B1A08', alignItems: 'center' },
   glow: {
     position: 'absolute', top: height * 0.02,
     width: width * 0.9, height: width * 0.9, borderRadius: width * 0.45,
-    backgroundColor: 'rgba(88,204,2,0.06)',
+    backgroundColor: 'rgba(61,184,44,0.08)',
   },
   dot: { position: 'absolute', backgroundColor: 'rgba(255,255,255,0.18)' },
   scroll: {
@@ -196,7 +208,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 46,
     fontFamily: 'Poppins-ExtraBold',
-    color: '#1E7214',
+    color: '#5ED82B',
     letterSpacing: -1,
     textAlign: 'center',
     marginBottom: 6,
@@ -215,7 +227,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row', alignItems: 'center', gap: 12,
     backgroundColor: 'rgba(255,255,255,0.07)',
     borderRadius: Radius.xl, borderWidth: 1.5,
-    borderColor: 'rgba(255,255,255,0.1)',
+    borderColor: 'rgba(255,255,255,0.12)',
     paddingHorizontal: 16, height: 56,
   },
   input: {
@@ -231,23 +243,23 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   primaryBtn: {
-    backgroundColor: '#1E7214',
+    backgroundColor: '#5ED82B',
     borderRadius: 50, paddingVertical: 18,
     alignItems: 'center', marginTop: 4,
-    shadowColor: '#1E7214',
+    shadowColor: '#5ED82B',
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.45, shadowRadius: 16, elevation: 10,
   },
   primaryBtnText: {
     fontSize: 15, fontFamily: 'Poppins-Bold',
-    color: '#1A1A1A', letterSpacing: 1.2,
+    color: '#0B1A08', letterSpacing: 1.2,
   },
   secondaryBtn: {
-    borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.25)',
+    borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.22)',
     borderRadius: 50, paddingVertical: 18, alignItems: 'center',
   },
   secondaryBtnText: {
     fontSize: 13, fontFamily: 'Poppins-Bold',
-    color: '#1E7214', letterSpacing: 1,
+    color: '#5ED82B', letterSpacing: 1,
   },
 });

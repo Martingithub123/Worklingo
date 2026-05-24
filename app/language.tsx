@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   View,
   Text,
@@ -9,6 +8,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { useApp } from '@/context/AppContext';
+import { getStrings } from '@/constants/i18n';
 import { Language, LanguageOption } from '@/types';
 import { Colors, Spacing, Radius, FontSize } from '@/constants/theme';
 import { Logo } from '@/components/Logo';
@@ -30,14 +30,15 @@ const LANGUAGES: LanguageOption[] = [
 ];
 
 export default function LanguageScreen() {
-  const { language, setLanguage, colors } = useApp();
+  const { language, setLanguage, colors, uiLanguage } = useApp();
+  const t = getStrings(uiLanguage);
 
   const handleSelect = (code: Language) => {
     setLanguage(code);
   };
 
   const handleContinue = () => {
-    router.push('/jobs');
+    router.push('/mode-select' as any);
   };
 
   return (
@@ -54,10 +55,10 @@ export default function LanguageScreen() {
       >
         <View>
           <Text style={[styles.title, { color: colors.text }]}>
-            What language do you{'\n'}want to learn?
+            {t.whatLanguageLearn}
           </Text>
           <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
-            Select your target language to get started
+            {t.selectTargetLang}
           </Text>
         </View>
 
@@ -71,8 +72,8 @@ export default function LanguageScreen() {
                   style={[
                     styles.card,
                     {
-                      backgroundColor: selected ? Colors.primary : colors.card,
-                      borderColor: selected ? Colors.primary : colors.cardBorder,
+                      backgroundColor: selected ? Colors.primaryGlow : colors.card,
+                      borderColor: selected ? Colors.primaryGlow : colors.cardBorder,
                     },
                   ]}
                 >
@@ -95,7 +96,7 @@ export default function LanguageScreen() {
                   </Text>
                   {selected && (
                     <View style={styles.checkBadge}>
-                      <Check size={12} color="#1E7214" strokeWidth={3} />
+                      <Check size={12} color="#0B1A08" strokeWidth={3} />
                     </View>
                   )}
                 </PressableCard>
@@ -111,7 +112,7 @@ export default function LanguageScreen() {
           onPress={handleContinue}
           activeOpacity={0.85}
         >
-          <Text style={styles.continueBtnText}>Continue</Text>
+          <Text style={styles.continueBtnText}>{t.continue}</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -199,18 +200,18 @@ const styles = StyleSheet.create({
     paddingTop: Spacing.md,
   },
   continueBtn: {
-    backgroundColor: Colors.primary,
+    backgroundColor: Colors.primaryGlow,
     borderRadius: Radius.full,
     paddingVertical: 16,
     alignItems: 'center',
-    shadowColor: Colors.primary,
+    shadowColor: Colors.primaryGlow,
     shadowOffset: { width: 0, height: 6 },
     shadowOpacity: 0.35,
     shadowRadius: 12,
     elevation: 6,
   },
   continueBtnText: {
-    color: '#FFFFFF',
+    color: '#0B1A08',
     fontSize: FontSize.lg,
     fontFamily: 'Poppins-Bold',
     letterSpacing: 0.2,

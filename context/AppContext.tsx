@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 import { Language, ThemeMode } from '@/types';
 import { Colors } from '@/constants/theme';
 
@@ -8,6 +8,10 @@ interface AppContextType {
   theme: ThemeMode;
   toggleTheme: () => void;
   colors: typeof Colors.dark;
+  uiLanguage: string;
+  setUiLanguage: (lang: string) => void;
+  referralSource: string;
+  setReferralSource: (source: string) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -15,12 +19,19 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export function AppProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>('en');
   const [theme, setTheme] = useState<ThemeMode>('dark');
+  const [uiLanguage, setUiLanguage] = useState<string>('en');
+  const [referralSource, setReferralSource] = useState<string>('');
 
   const toggleTheme = () => setTheme(t => (t === 'dark' ? 'light' : 'dark'));
   const colors = theme === 'dark' ? Colors.dark : Colors.light;
 
   return (
-    <AppContext.Provider value={{ language, setLanguage, theme, toggleTheme, colors }}>
+    <AppContext.Provider value={{
+      language, setLanguage,
+      theme, toggleTheme, colors,
+      uiLanguage, setUiLanguage,
+      referralSource, setReferralSource,
+    }}>
       {children}
     </AppContext.Provider>
   );

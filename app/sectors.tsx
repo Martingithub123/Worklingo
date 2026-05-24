@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   View, Text, StyleSheet, ScrollView,
   TouchableOpacity, Dimensions,
@@ -6,6 +5,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useApp } from '@/context/AppContext';
+import { getStrings } from '@/constants/i18n';
 import { dataService } from '@/services/dataService';
 import { FontSize } from '@/constants/theme';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -17,7 +17,8 @@ const GAP = 14;
 const CARD = (width - 40 - GAP) / COLS;
 
 export default function SectorsScreen() {
-  const { language, colors } = useApp();
+  const { colors, uiLanguage } = useApp();
+  const t = getStrings(uiLanguage);
   const { jobId } = useLocalSearchParams<{ jobId: string }>();
 
   const job = dataService.getJobById(jobId);
@@ -33,8 +34,8 @@ export default function SectorsScreen() {
           <ChevronLeft size={20} color={colors.text} strokeWidth={2.5} />
         </TouchableOpacity>
         <View style={styles.headerCenter}>
-          <Text style={[styles.headerStep, { color: colors.textSecondary }]}>STEP 2 OF 3</Text>
-          <Text style={[styles.headerTitle, { color: colors.text }]}>Choose Sector</Text>
+          <Text style={[styles.headerStep, { color: colors.textSecondary }]}>{t.step2of3}</Text>
+          <Text style={[styles.headerTitle, { color: colors.text }]}>{t.chooseSector}</Text>
         </View>
         <ThemeToggle />
       </View>
@@ -43,11 +44,11 @@ export default function SectorsScreen() {
         {/* Job breadcrumb */}
         <View style={[styles.breadcrumb, { backgroundColor: colors.surface }]}>
           <Text style={styles.breadcrumbIcon}>{job.icon}</Text>
-          <Text style={[styles.breadcrumbText, { color: colors.textSecondary }]}>{job.name[language] ?? job.name.en}</Text>
+          <Text style={[styles.breadcrumbText, { color: colors.textSecondary }]}>{(job.name as any)[uiLanguage.split('-')[0]] ?? job.name.en}</Text>
         </View>
 
-        <Text style={[styles.title, { color: colors.text }]}>Which sector?</Text>
-        <Text style={[styles.subtitle, { color: colors.textSecondary }]}>Pick the area where you work</Text>
+        <Text style={[styles.title, { color: colors.text }]}>{t.whichSector}</Text>
+        <Text style={[styles.subtitle, { color: colors.textSecondary }]}>{t.pickYourArea}</Text>
 
         {/* Grid 2 columns */}
         <View style={styles.grid}>
@@ -59,7 +60,7 @@ export default function SectorsScreen() {
               activeOpacity={0.8}
             >
               <Text style={styles.icon}>{sector.icon}</Text>
-              <Text style={[styles.name, { color: colors.text }]} numberOfLines={2}>{sector.name[language] ?? sector.name.en}</Text>
+              <Text style={[styles.name, { color: colors.text }]} numberOfLines={2}>{(sector.name as any)[uiLanguage.split('-')[0]] ?? sector.name.en}</Text>
             </TouchableOpacity>
           ))}
         </View>

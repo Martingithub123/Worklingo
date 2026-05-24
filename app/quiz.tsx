@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useMemo } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import {
   View,
   Text,
@@ -659,7 +659,6 @@ const styles = StyleSheet.create({
     maxHeight: 300,
     minHeight: 200,
   },
-  image: { width: '100%', height: '100%' },
   imageOverlay: {
     position: 'absolute',
     bottom: 0,
@@ -763,7 +762,6 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   audioLabel: { fontSize: FontSize.xl, fontFamily: 'Poppins-SemiBold' },
-  audioHint: { fontSize: FontSize.sm, fontFamily: 'Poppins-Regular' },
   audioHintBox: {
     borderRadius: Radius.xl,
     padding: Spacing.lg,
@@ -789,16 +787,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  preloadContainer: {
-    flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 40, gap: 16,
-  },
-  preloadEmoji: { fontSize: 64 },
-  preloadTitle: { fontSize: 20, fontFamily: 'Poppins-SemiBold', textAlign: 'center' },
-  preloadBarBg: {
-    width: '100%', height: 8, borderRadius: 99, overflow: 'hidden',
-  },
-  preloadBarFill: {
-    height: '100%', borderRadius: 99, backgroundColor: '#1E7214',
-  },
-  preloadPct: { fontSize: 14, fontFamily: 'Poppins-Medium' },
 });

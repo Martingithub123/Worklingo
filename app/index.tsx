@@ -1,8 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Dimensions, Animated, Easing } from 'react-native';
+import { useEffect, useRef } from 'react';
+import { View, Text, StyleSheet, Dimensions, Animated, Easing, Image } from 'react-native';
 import { router } from 'expo-router';
 
-import BeeMascot from '@/components/BeeMascot';
 import { useAuth } from '@/context/AuthContext';
 
 const { width, height } = Dimensions.get('window');
@@ -57,7 +56,7 @@ export default function SplashScreen() {
     const timer = setTimeout(() => {
       const { user: u, loading: l } = authRef.current;
       if (!l && u) {
-        router.replace('/language' as any);
+        router.replace('/ui-language' as any);
         return;
       }
       router.replace('/welcome' as any);
@@ -98,12 +97,16 @@ export default function SplashScreen() {
 
       {/* Bee */}
       <Animated.View style={{ opacity: mascotOp, transform: [{ translateY: mascotY }] }}>
-        <BeeMascot size={200} />
+        <Image
+          source={require('@/assets/images/bee-icon-new.png')}
+          style={{ width: 200, height: 200 }}
+          resizeMode="contain"
+        />
       </Animated.View>
 
       {/* Text */}
       <Animated.View style={[styles.textBlock, { opacity: textOp, transform: [{ translateY: textY }] }]}>
-        <Text style={styles.title}>BeeFluent</Text>
+        <Text style={styles.title}>FluentBee</Text>
         <View style={styles.tagRow}>
           <View style={styles.tagDot} />
           <Text style={styles.subtitle}>Ready to buzz!</Text>
@@ -149,6 +152,14 @@ const styles = StyleSheet.create({
     textShadowColor: 'rgba(0,0,0,0.08)',
     textShadowOffset: { width: 0, height: 3 },
     textShadowRadius: 6,
+  },
+  workRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  workDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: '#111111', opacity: 0.5 },
+  workText: {
+    fontSize: 42,
+    fontFamily: 'Poppins-ExtraBold',
+    color: '#111111',
+    letterSpacing: -1,
   },
   tagRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   tagDot: { width: 5, height: 5, borderRadius: 2.5, backgroundColor: '#111111', opacity: 0.4 },

@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   View,
   Text,
@@ -9,6 +8,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useApp } from '@/context/AppContext';
+import { getStrings } from '@/constants/i18n';
 import { dataService } from '@/services/dataService';
 import { Colors, Spacing, Radius, FontSize } from '@/constants/theme';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -16,7 +16,8 @@ import { PressableCard } from '@/components/PressableCard';
 import { ChevronLeft, BookOpen } from 'lucide-react-native';
 
 export default function RolesScreen() {
-  const { language, colors } = useApp();
+  const { colors, uiLanguage } = useApp();
+  const t = getStrings(uiLanguage);
   const { jobId, sectorId } = useLocalSearchParams<{ jobId: string; sectorId: string }>();
 
   const job = dataService.getJobById(jobId);
@@ -40,8 +41,8 @@ export default function RolesScreen() {
           <ChevronLeft size={20} color={colors.text} strokeWidth={2.5} />
         </TouchableOpacity>
         <View style={styles.headerCenter}>
-          <Text style={[styles.headerLabel, { color: colors.textSecondary }]}>Step 3 of 3</Text>
-          <Text style={[styles.headerTitle, { color: colors.text }]}>Role</Text>
+          <Text style={[styles.headerLabel, { color: colors.textSecondary }]}>{t.step3of3}</Text>
+          <Text style={[styles.headerTitle, { color: colors.text }]}>{t.roleLabel}</Text>
         </View>
         <ThemeToggle />
       </View>
@@ -56,23 +57,23 @@ export default function RolesScreen() {
             <View style={[styles.breadcrumb, { backgroundColor: colors.surface }]}>
               <Text style={styles.breadcrumbIcon}>{job.icon}</Text>
               <Text style={[styles.breadcrumbText, { color: colors.textSecondary }]}>
-                {job.name[language] ?? job.name.en}
+                {(job.name as any)[uiLanguage.split('-')[0]] ?? job.name.en}
               </Text>
             </View>
             <Text style={[styles.breadcrumbSep, { color: colors.textMuted }]}>›</Text>
             <View style={[styles.breadcrumb, { backgroundColor: colors.surface }]}>
               <Text style={styles.breadcrumbIcon}>{sector.icon}</Text>
               <Text style={[styles.breadcrumbText, { color: colors.textSecondary }]}>
-                {sector.name[language] ?? sector.name.en}
+                {(sector.name as any)[uiLanguage.split('-')[0]] ?? sector.name.en}
               </Text>
             </View>
           </View>
 
           <Text style={[styles.title, { color: colors.text }]}>
-            Select your role
+            {t.selectYourRole}
           </Text>
           <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
-            Each role has its own vocabulary set to master
+            {t.eachRoleHasVocab}
           </Text>
         </View>
 
@@ -85,22 +86,22 @@ export default function RolesScreen() {
                   onPress={() => handleSelect(role.id)}
                   style={[styles.card, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}
                 >
-                  <View style={[styles.iconBox, { backgroundColor: Colors.primary + '18' }]}>
+                  <View style={[styles.iconBox, { backgroundColor: Colors.primaryGlow + '18' }]}>
                     <Text style={styles.roleIcon}>{role.icon}</Text>
                   </View>
                   <View style={styles.cardText}>
                     <Text style={[styles.roleName, { color: colors.text }]}>
-                      {role.name[language] ?? role.name.en}
+                      {(role.name as any)[uiLanguage.split('-')[0]] ?? role.name.en}
                     </Text>
                     <View style={styles.metaRow}>
                       <BookOpen size={13} color={colors.textSecondary} strokeWidth={2} />
                       <Text style={[styles.itemCount, { color: colors.textSecondary }]}>
-                        {itemCount} words to learn
+                        {itemCount} {t.wordsToLearn}
                       </Text>
                     </View>
                   </View>
-                  <View style={[styles.startBtn, { backgroundColor: Colors.primary }]}>
-                    <Text style={styles.startBtnText}>Start</Text>
+                  <View style={[styles.startBtn, { backgroundColor: Colors.primaryGlow }]}>
+                    <Text style={styles.startBtnText}>{t.start}</Text>
                   </View>
                 </PressableCard>
               </View>
@@ -225,7 +226,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   startBtnText: {
-    color: '#FFFFFF',
+    color: '#0B1A08',
     fontSize: FontSize.sm,
     fontFamily: 'Poppins-SemiBold',
   },

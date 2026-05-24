@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   View, Text, StyleSheet, ScrollView, Image,
   TouchableOpacity,
@@ -6,6 +5,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { useApp } from '@/context/AppContext';
+import { getStrings } from '@/constants/i18n';
 import { dataService } from '@/services/dataService';
 import { FontSize } from '@/constants/theme';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -14,7 +14,8 @@ import { ChevronLeft, ChevronRight } from 'lucide-react-native';
 const CARD_HEIGHT = 170;
 
 export default function JobsScreen() {
-  const { language, colors } = useApp();
+  const { colors, uiLanguage } = useApp();
+  const t = getStrings(uiLanguage);
   const jobs = dataService.getAllJobs();
 
   return (
@@ -25,15 +26,15 @@ export default function JobsScreen() {
           <ChevronLeft size={20} color={colors.text} strokeWidth={2.5} />
         </TouchableOpacity>
         <View style={styles.headerCenter}>
-          <Text style={[styles.headerStep, { color: colors.textSecondary }]}>STEP 1 OF 3</Text>
-          <Text style={[styles.headerTitle, { color: colors.text }]}>Job Category</Text>
+          <Text style={[styles.headerStep, { color: colors.textSecondary }]}>{t.step1of3}</Text>
+          <Text style={[styles.headerTitle, { color: colors.text }]}>{t.jobCategory}</Text>
         </View>
         <ThemeToggle />
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        <Text style={[styles.pageTitle, { color: colors.text }]}>Choose your{'\n'}workplace</Text>
-        <Text style={[styles.pageSubtitle, { color: colors.textSecondary }]}>Learn vocabulary for your professional environment</Text>
+        <Text style={[styles.pageTitle, { color: colors.text }]}>{t.chooseWorkplace}</Text>
+        <Text style={[styles.pageSubtitle, { color: colors.textSecondary }]}>{t.learnVocabEnv}</Text>
 
         <View style={styles.list}>
           {jobs.map((job) => (
@@ -48,7 +49,7 @@ export default function JobsScreen() {
               <View style={styles.cardBody}>
                 <View>
                   <Text style={styles.cardIcon}>{job.icon}</Text>
-                  <Text style={styles.cardName}>{job.name[language] ?? job.name.en}</Text>
+                  <Text style={styles.cardName}>{(job.name as any)[uiLanguage.split('-')[0]] ?? job.name.en}</Text>
                   <Text style={styles.cardSub}>
                     {job.sectors.length} role{job.sectors.length !== 1 ? 's' : ''}
                   </Text>
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
   },
   arrowBtn: {
     width: 40, height: 40, borderRadius: 20,
-    backgroundColor: '#1E7214',
+    backgroundColor: '#5ED82B',
     alignItems: 'center', justifyContent: 'center',
     alignSelf: 'flex-end',
   },

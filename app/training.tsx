@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native';
+import { useRef, useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Animated, Image, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Asset } from 'expo-asset';
@@ -9,9 +9,10 @@ import { LEVELS } from '@/data/levels';
 import { Colors, FontSize } from '@/constants/theme';
 import { ChevronLeft } from 'lucide-react-native';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import BeeMascot from '@/components/BeeMascot';
 import images from '@/services/imageRegistry';
 import { VocabularyItem } from '@/types';
+
+const { width: screenWidth } = Dimensions.get('window');
 
 const MIN_DURATION = 3000; // always show at least 3 seconds
 
@@ -178,7 +179,11 @@ export default function TrainingScreen() {
 
       <View style={styles.center}>
         <Animated.View style={{ opacity: beeOp, transform: [{ scale: beeSc }] }}>
-          <BeeMascot size={120} />
+          <Image
+            source={require('@/assets/images/bee-icon-new.png')}
+            style={{ width: screenWidth * 0.35, height: screenWidth * 0.35 }}
+            resizeMode="contain"
+          />
         </Animated.View>
 
         <Text style={[styles.title, { color: colors.text }]}>
@@ -208,7 +213,7 @@ export default function TrainingScreen() {
           <View style={[styles.barBg, { backgroundColor: colors.surface }]}>
             <Animated.View style={[styles.barFill, { width: barWidth }]} />
           </View>
-          <Text style={[styles.barLabel, { color: ready ? '#1E7214' : colors.textSecondary }]}>
+          <Text style={[styles.barLabel, { color: ready ? '#5ED82B' : colors.textSecondary }]}>
             {ready ? ui.barReady : ui.barLoading}
           </Text>
         </View>
@@ -253,18 +258,18 @@ const styles = StyleSheet.create({
   pillText: { fontSize: FontSize.sm, fontFamily: 'Poppins-SemiBold' },
   barWrapper: { width: '100%', gap: 8, alignItems: 'center' },
   barBg: { width: '100%', height: 10, borderRadius: 99, overflow: 'hidden' },
-  barFill: { height: '100%', borderRadius: 99, backgroundColor: '#1E7214' },
+  barFill: { height: '100%', borderRadius: 99, backgroundColor: '#5ED82B' },
   barLabel: { fontSize: 12, fontFamily: 'Poppins-Medium' },
   btnWrapper: { width: '100%', marginTop: 8 },
   glowWrapper: {
     borderRadius: 99,
-    shadowColor: Colors.primary,
+    shadowColor: Colors.primaryGlow,
     shadowOffset: { width: 0, height: 0 },
     elevation: 10,
   },
   startBtn: {
-    backgroundColor: Colors.primary,
+    backgroundColor: Colors.primaryGlow,
     borderRadius: 99, paddingVertical: 18, alignItems: 'center',
   },
-  startBtnText: { fontSize: 16, fontFamily: 'Poppins-Bold', color: '#FFFFFF', letterSpacing: 1.2 },
+  startBtnText: { fontSize: 16, fontFamily: 'Poppins-Bold', color: '#0B1A08', letterSpacing: 1.2 },
 });

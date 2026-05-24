@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   View, Text, StyleSheet, ScrollView, TouchableOpacity,
   Modal, Pressable,
@@ -87,23 +87,31 @@ const TIP_LABELS: Record<string, Record<string, string>> = {
   levelHint:  { en: 'Start from Level 1 and work your way up', pt: 'Comece pelo Nível 1 e vá subindo', es: 'Empieza desde el Nivel 1 y ve subiendo', fr: 'Commencez au Niveau 1 et progressez', de: 'Beginne mit Level 1 und arbeite dich hoch', it: 'Inizia dal Livello 1 e vai avanti', nl: 'Begin bij Niveau 1 en werk omhoog', zh: '从第1关开始，逐步提升', ja: 'レベル1から始めて上を目指そう', ru: 'Начните с уровня 1 и продвигайтесь вперёд' },
 };
 
-function PolitenessModal({ visible, onClose, language }: { visible: boolean; onClose: () => void; language: string }) {
-  const lang = (language as keyof typeof TIP_LABELS.title) in TIP_LABELS.title ? language : 'en';
+const DL_SUPPORTED = ['en', 'pt', 'es', 'fr', 'de', 'it', 'nl', 'zh', 'ja', 'ru'];
+function dl(code: string): string {
+  if (DL_SUPPORTED.includes(code)) return code;
+  const base = code.split('-')[0];
+  return DL_SUPPORTED.includes(base) ? base : 'en';
+}
+
+function PolitenessModal({ visible, onClose, language, uiLanguage }: {
+  visible: boolean; onClose: () => void; language: string; uiLanguage: string;
+}) {
+  const targetLang = dl(language);
+  const homeLang   = dl(uiLanguage);
 
   return (
     <Modal visible={visible} animationType="slide" presentationStyle="pageSheet" onRequestClose={onClose}>
       <View style={modal.container}>
-        {/* Handle bar */}
         <View style={modal.handle} />
 
-        {/* Close button */}
         <TouchableOpacity style={modal.closeBtn} onPress={onClose} activeOpacity={0.7}>
           <X size={20} color="#888" strokeWidth={2.5} />
         </TouchableOpacity>
 
         <ScrollView contentContainerStyle={modal.scroll} showsVerticalScrollIndicator={false}>
-          <Text style={modal.title}>{TIP_LABELS.title[lang] ?? TIP_LABELS.title.en}</Text>
-          <Text style={modal.subtitle}>{TIP_LABELS.subtitle[lang] ?? TIP_LABELS.subtitle.en}</Text>
+          <Text style={modal.title}>{TIP_LABELS.title[homeLang] ?? TIP_LABELS.title.en}</Text>
+          <Text style={modal.subtitle}>{TIP_LABELS.subtitle[homeLang] ?? TIP_LABELS.subtitle.en}</Text>
 
           {POLITENESS_TIPS.map((tip, i) => (
             <View key={i} style={modal.card}>
@@ -111,26 +119,28 @@ function PolitenessModal({ visible, onClose, language }: { visible: boolean; onC
                 <Text style={modal.cardEmoji}>{tip.emoji}</Text>
                 <View style={modal.cardHeaderText}>
                   <Text style={modal.phrase}>
-                    {tip.translation[lang as keyof typeof tip.translation] ?? tip.phrase}
+                    {tip.translation[targetLang as keyof typeof tip.translation] ?? tip.phrase}
                   </Text>
-                  {lang !== 'en' && (
-                    <Text style={modal.translation}>→ {tip.phrase}</Text>
+                  {homeLang !== targetLang && (
+                    <Text style={modal.translation}>
+                      → {tip.translation[homeLang as keyof typeof tip.translation] ?? tip.phrase}
+                    </Text>
                   )}
                 </View>
               </View>
               <View style={modal.exampleRow}>
-                <Text style={modal.exampleLabel}>{TIP_LABELS.example[lang] ?? 'Example'}:</Text>
-                <Text style={modal.exampleText}>"{tip.example[lang as keyof typeof tip.example] ?? tip.example.en}"</Text>
+                <Text style={modal.exampleLabel}>{TIP_LABELS.example[homeLang] ?? 'Example'}:</Text>
+                <Text style={modal.exampleText}>"{tip.example[targetLang as keyof typeof tip.example] ?? tip.example.en}"</Text>
               </View>
             </View>
           ))}
 
           <View style={modal.proTip}>
-            <Text style={modal.proTipText}>{TIP_LABELS.tip[lang] ?? TIP_LABELS.tip.en}</Text>
+            <Text style={modal.proTipText}>{TIP_LABELS.tip[homeLang] ?? TIP_LABELS.tip.en}</Text>
           </View>
 
           <TouchableOpacity style={modal.gotItBtn} onPress={onClose} activeOpacity={0.85}>
-            <Text style={modal.gotItText}>{TIP_LABELS.close[lang] ?? 'Got it!'}</Text>
+            <Text style={modal.gotItText}>{TIP_LABELS.close[homeLang] ?? 'Got it!'}</Text>
           </TouchableOpacity>
         </ScrollView>
       </View>
@@ -139,7 +149,8 @@ function PolitenessModal({ visible, onClose, language }: { visible: boolean; onC
 }
 
 export default function LevelsScreen() {
-  const { language, colors } = useApp();
+  const { language, colors, uiLanguage } = useApp();
+  const uiLang = dl(uiLanguage);
   const { jobId, sectorId } = useLocalSearchParams<{ jobId: string; sectorId: string }>();
   const [tipsVisible, setTipsVisible] = useState(false);
 
@@ -159,24 +170,24 @@ export default function LevelsScreen() {
           <ChevronLeft size={20} color={colors.text} strokeWidth={2.5} />
         </TouchableOpacity>
         <View style={styles.headerCenter}>
-          <Text style={[styles.headerSub, { color: colors.textSecondary }]}>{sector.icon} {sector.name[language]}</Text>
-          <Text style={[styles.headerTitle, { color: colors.text }]}>{TIP_LABELS.chooseLevel[language] ?? TIP_LABELS.chooseLevel.en}</Text>
+          <Text style={[styles.headerSub, { color: colors.textSecondary }]}>{sector.icon} {(sector.name as any)[uiLang] ?? sector.name.en}</Text>
+          <Text style={[styles.headerTitle, { color: colors.text }]}>{TIP_LABELS.chooseLevel[uiLang] ?? TIP_LABELS.chooseLevel.en}</Text>
         </View>
         <ThemeToggle />
       </View>
 
       {/* Politeness tips banner */}
-      <Pressable style={[styles.tipsBanner, { backgroundColor: '#1E7214' + '18', borderColor: '#1E7214' + '44' }]} onPress={() => setTipsVisible(true)}>
+      <Pressable style={[styles.tipsBanner, { backgroundColor: '#5ED82B' + '18', borderColor: '#5ED82B' + '44' }]} onPress={() => setTipsVisible(true)}>
         <Text style={styles.tipsBannerEmoji}>💬</Text>
         <View style={styles.tipsBannerText}>
-          <Text style={[styles.tipsBannerTitle, { color: '#1E7214' }]}>{TIP_LABELS.title[language] ?? TIP_LABELS.title.en}</Text>
-          <Text style={[styles.tipsBannerSub, { color: colors.textSecondary }]}>{TIP_LABELS.bannerSub[language] ?? TIP_LABELS.bannerSub.en}</Text>
+          <Text style={[styles.tipsBannerTitle, { color: '#5ED82B' }]}>{TIP_LABELS.title[uiLang] ?? TIP_LABELS.title.en}</Text>
+          <Text style={[styles.tipsBannerSub, { color: colors.textSecondary }]}>{TIP_LABELS.bannerSub[uiLang] ?? TIP_LABELS.bannerSub.en}</Text>
         </View>
       </Pressable>
 
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <Text style={[styles.title, { color: colors.text }]}>{TIP_LABELS.tenLevels[language] ?? TIP_LABELS.tenLevels.en}</Text>
-        <Text style={[styles.subtitle, { color: colors.textSecondary }]}>{TIP_LABELS.levelHint[language] ?? TIP_LABELS.levelHint.en}</Text>
+        <Text style={[styles.title, { color: colors.text }]}>{TIP_LABELS.tenLevels[uiLang] ?? TIP_LABELS.tenLevels.en}</Text>
+        <Text style={[styles.subtitle, { color: colors.textSecondary }]}>{TIP_LABELS.levelHint[uiLang] ?? TIP_LABELS.levelHint.en}</Text>
 
         <View style={styles.list}>
           {LEVELS.map((level) => (
@@ -193,9 +204,9 @@ export default function LevelsScreen() {
 
               {/* Info */}
               <View style={styles.rowInfo}>
-                <Text style={[styles.levelName, { color: colors.text }]}>{level.name[language] ?? level.name.en}</Text>
+                <Text style={[styles.levelName, { color: colors.text }]}>{(level.name as any)[uiLang] ?? level.name.en}</Text>
                 <Text style={[styles.levelDesc, { color: colors.textSecondary }]} numberOfLines={1}>
-                  {level.description[language] ?? level.description.en}
+                  {(level.description as any)[uiLang] ?? level.description.en}
                 </Text>
               </View>
 
@@ -206,7 +217,7 @@ export default function LevelsScreen() {
         </View>
       </ScrollView>
 
-      <PolitenessModal visible={tipsVisible} onClose={() => setTipsVisible(false)} language={language} />
+      <PolitenessModal visible={tipsVisible} onClose={() => setTipsVisible(false)} language={language} uiLanguage={uiLanguage} />
     </SafeAreaView>
   );
 }
@@ -250,7 +261,7 @@ const styles = StyleSheet.create({
 });
 
 const modal = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#111111', paddingTop: 12 },
+  container: { flex: 1, backgroundColor: '#0B1A08', paddingTop: 12 },
   handle: {
     width: 40, height: 4, borderRadius: 2,
     backgroundColor: 'rgba(255,255,255,0.2)',
@@ -282,22 +293,22 @@ const modal = StyleSheet.create({
   cardEmoji: { fontSize: 28 },
   cardHeaderText: { flex: 1 },
   phrase: { fontSize: 17, fontFamily: 'Poppins-Bold', color: '#FFFFFF' },
-  translation: { fontSize: 14, fontFamily: 'Poppins-Medium', color: '#1E7214', marginTop: 1 },
+  translation: { fontSize: 14, fontFamily: 'Poppins-Medium', color: '#5ED82B', marginTop: 1 },
   exampleRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 4 },
   exampleLabel: { fontSize: 12, fontFamily: 'Poppins-SemiBold', color: 'rgba(255,255,255,0.4)' },
   exampleText: { fontSize: 13, fontFamily: 'Poppins-Regular', color: 'rgba(255,255,255,0.7)', fontStyle: 'italic', flex: 1 },
   proTip: {
-    backgroundColor: '#1E7214' + '22',
+    backgroundColor: '#5ED82B' + '22',
     borderRadius: 14, borderWidth: 1,
-    borderColor: '#1E7214' + '55',
+    borderColor: '#5ED82B' + '55',
     padding: 16, marginTop: 8, marginBottom: 20,
   },
-  proTipText: { fontSize: 13, fontFamily: 'Poppins-SemiBold', color: '#1E7214', lineHeight: 20 },
+  proTipText: { fontSize: 13, fontFamily: 'Poppins-SemiBold', color: '#5ED82B', lineHeight: 20 },
   gotItBtn: {
-    backgroundColor: '#1E7214', borderRadius: 50,
+    backgroundColor: '#5ED82B', borderRadius: 50,
     paddingVertical: 18, alignItems: 'center',
-    shadowColor: '#1E7214', shadowOffset: { width: 0, height: 6 },
+    shadowColor: '#5ED82B', shadowOffset: { width: 0, height: 6 },
     shadowOpacity: 0.4, shadowRadius: 14, elevation: 8,
   },
-  gotItText: { fontSize: 15, fontFamily: 'Poppins-Bold', color: '#1A1A1A', letterSpacing: 0.8 },
+  gotItText: { fontSize: 15, fontFamily: 'Poppins-Bold', color: '#0B1A08', letterSpacing: 0.8 },
 });

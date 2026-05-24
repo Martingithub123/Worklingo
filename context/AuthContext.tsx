@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Session, User } from '@supabase/supabase-js';
 
@@ -61,13 +61,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (error) return { error: friendlyAuthError(error.message) };
 
     if (data.user) {
-      await supabase.from('profiles').upsert({
+      const { error: upsertError } = await supabase.from('profiles').upsert({
         id: data.user.id,
         email,
         full_name: name,
         xp: 0,
-        created_at: new Date().toISOString(),
       });
+      if (upsertError) { /* profile will be created on next sign-in via upsert */ }
     }
 
     return { error: null };
