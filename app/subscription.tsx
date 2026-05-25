@@ -143,7 +143,7 @@ export default function SubscriptionScreen() {
             >
               {/* Best value badge */}
               <View style={styles.badge}>
-                <Text style={styles.badgeText}>50% OFF</Text>
+                <Text style={styles.badgeText}>40% OFF</Text>
               </View>
 
               <View style={styles.planRadio}>
