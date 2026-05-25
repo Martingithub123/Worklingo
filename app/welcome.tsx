@@ -173,8 +173,8 @@ export default function WelcomeScreen() {
             transform: [{ translateY: textY }],
           }]}>
             <View style={styles.titleRow}>
-              <Text style={styles.titleBee}>Bee</Text>
-              <Text style={styles.titleFluent}>Fluent</Text>
+              <Text style={styles.titleBee}>Fluent</Text>
+              <Text style={styles.titleFluent}>Bee</Text>
             </View>
             <Text style={styles.tagline}>
               Learn for free. Master your{'\n'}workplace language.
