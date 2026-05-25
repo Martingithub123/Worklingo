@@ -166,7 +166,7 @@ export default function LearnLessonScreen() {
     setPhase('lesson');
   };
 
-  const handleContinue = async () => {
+  const handleFinish = async () => {
     const subscribed = await AsyncStorage.getItem('isSubscribed');
     if (subscribed === 'true') {
       router.back();
@@ -211,7 +211,7 @@ export default function LearnLessonScreen() {
 
           <TouchableOpacity
             style={[styles.primaryBtn, { backgroundColor: Colors.primaryGlow }]}
-            onPress={handleContinue}
+            onPress={handleFinish}
             activeOpacity={0.85}
           >
             <Text style={styles.primaryBtnText}>{t.continue}</Text>
