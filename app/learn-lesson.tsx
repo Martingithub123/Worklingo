@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Haptics from 'expo-haptics';
 import * as Speech from 'expo-speech';
 import { useApp } from '@/context/AppContext';
@@ -165,6 +166,15 @@ export default function LearnLessonScreen() {
     setPhase('lesson');
   };
 
+  const handleContinue = async () => {
+    const subscribed = await AsyncStorage.getItem('isSubscribed');
+    if (subscribed === 'true') {
+      router.back();
+    } else {
+      router.replace('/subscription' as any);
+    }
+  };
+
   // ── Completion screen ───────────────────────────────────────────────
   if (phase === 'complete') {
     return (
@@ -201,7 +211,7 @@ export default function LearnLessonScreen() {
 
           <TouchableOpacity
             style={[styles.primaryBtn, { backgroundColor: Colors.primaryGlow }]}
-            onPress={() => router.back()}
+            onPress={handleContinue}
             activeOpacity={0.85}
           >
             <Text style={styles.primaryBtnText}>{t.continue}</Text>
