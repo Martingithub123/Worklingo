@@ -56,7 +56,7 @@ export default function SplashScreen() {
     const timer = setTimeout(() => {
       const { user: u, loading: l } = authRef.current;
       if (!l && u) {
-        router.replace('/ui-language' as any);
+        router.replace('/language' as any);
         return;
       }
       router.replace('/welcome' as any);

@@ -5,6 +5,7 @@ import {
   Animated, Dimensions, Image,
 } from 'react-native';
 import { router } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAuth } from '@/context/AuthContext';
 import { useApp } from '@/context/AppContext';
 import { getStrings } from '@/constants/i18n';
@@ -15,7 +16,7 @@ const { width, height } = Dimensions.get('window');
 
 export default function SignUpScreen() {
   const { signUp } = useAuth();
-  const { uiLanguage } = useApp();
+  const { uiLanguage, language, referralSource } = useApp();
   const t = getStrings(uiLanguage);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -66,8 +67,13 @@ export default function SignUpScreen() {
     setLoading(true); setError('');
     const { error } = await signUp(email.trim(), password, name.trim());
     setLoading(false);
-    if (error) setError(error);
-    else router.replace('/ui-language' as any);
+    if (error) { setError(error); return; }
+    await AsyncStorage.multiSet([
+      ['targetLanguage', language],
+      ['referralSource', referralSource],
+      ['isSubscribed', 'true'],
+    ]);
+    router.replace('/language' as any);
   };
 
   return (

@@ -54,7 +54,7 @@ export default function LoginScreen() {
     const { error } = await signIn(email.trim(), password);
     setLoading(false);
     if (error) setError(error);
-    else router.replace('/ui-language' as any);
+    else router.replace('/language' as any);
   };
 
   return (

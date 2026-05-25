@@ -19,8 +19,7 @@ import { dataService } from '@/services/dataService';
 import { supabase } from '@/lib/supabase';
 
 const PROTECTED_SEGMENTS = new Set([
-  'learn', 'learn-lesson', 'jobs', 'sectors', 'roles',
-  'levels', 'training', 'quiz', 'result', 'settings', 'mode-select',
+  'settings',
 ]);
 
 function AuthGuard({ children }: { children: ReactNode }) {
@@ -106,6 +105,7 @@ export default function RootLayout() {
           <Stack.Screen name="training" options={{ animation: 'slide_from_right' }} />
           <Stack.Screen name="quiz" options={{ animation: 'slide_from_right' }} />
           <Stack.Screen name="result" options={{ animation: 'slide_from_right' }} />
+          <Stack.Screen name="subscription" options={{ animation: 'slide_from_bottom' }} />
           <Stack.Screen name="+not-found" />
         </Stack>
         </AuthGuard>
