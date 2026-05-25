@@ -20,6 +20,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Speech from 'expo-speech';
 import images from '@/services/imageRegistry';
 import { router, useLocalSearchParams } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useApp } from '@/context/AppContext';
 import { dataService } from '@/services/dataService';
 import { LEVELS } from '@/data/levels';
@@ -136,16 +137,21 @@ export default function QuizScreen() {
       setTimeout(() => {
         if (currentIndex + 1 >= questions.length) {
           const correct = newResults.filter(r => r.correct).length;
-          router.replace({
-            pathname: '/result',
-            params: {
-              jobId, sectorId,
-              total: questions.length,
-              correct,
-              incorrect: questions.length - correct,
-              level: levelId,
-              xp: isCorrect ? levelConfig.xpReward : 0,
-            },
+          const resultParams = {
+            jobId: String(jobId ?? ''),
+            sectorId: String(sectorId ?? ''),
+            total: String(questions.length),
+            correct: String(correct),
+            incorrect: String(questions.length - correct),
+            level: String(levelId),
+            xp: String(isCorrect ? levelConfig.xpReward : 0),
+          };
+          AsyncStorage.getItem('isSubscribed').then(subscribed => {
+            if (subscribed === 'true') {
+              router.replace({ pathname: '/result', params: resultParams });
+            } else {
+              router.replace({ pathname: '/subscription', params: { ...resultParams, fromQuiz: 'true' } });
+            }
           });
         } else {
           setCurrentIndex(i => i + 1);

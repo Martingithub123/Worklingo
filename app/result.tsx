@@ -9,7 +9,6 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useAuth } from '@/context/AuthContext';
@@ -161,28 +160,13 @@ export default function ResultScreen() {
   const { emoji, title, sub } = getMessage();
   const accentColor = percentage >= 60 ? Colors.primaryGlow : Colors.warning;
 
-  const goViaSubscription = async () => {
-    const subscribed = await AsyncStorage.getItem('isSubscribed');
-    if (subscribed === 'true') {
-      router.replace({
-        pathname: '/levels',
-        params: { jobId: jobId ?? '', sectorId: sectorId ?? '' },
-      } as any);
-    } else {
-      router.replace({
-        pathname: '/subscription',
-        params: { returnJobId: jobId ?? '', returnSectorId: sectorId ?? '' },
-      } as any);
-    }
-  };
-
   const handleNextLevel = () => {
     const next = Math.min((parseInt(level ?? '1', 10) + 1), LEVELS.length);
     router.replace({ pathname: '/quiz', params: { jobId, sectorId, level: String(next) } });
   };
   const handleRetry     = () => router.replace({ pathname: '/quiz', params: { jobId, sectorId, level } });
   const handleNewSector = () => router.replace({ pathname: '/sectors', params: { jobId } });
-  const handleHome      = () => goViaSubscription();
+  const handleHome      = () => router.replace({ pathname: '/levels', params: { jobId: jobId ?? '', sectorId: sectorId ?? '' } } as any);
 
   return (
     <View style={[styles.root, { backgroundColor: colors.background }]}>

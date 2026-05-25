@@ -21,10 +21,19 @@ const PERKS = [
 
 export default function SubscriptionScreen() {
   const { colors } = useApp();
-  const { returnJobId, returnSectorId } = useLocalSearchParams<{
+  const params = useLocalSearchParams<{
     returnJobId?: string;
     returnSectorId?: string;
+    fromQuiz?: string;
+    jobId?: string;
+    sectorId?: string;
+    total?: string;
+    correct?: string;
+    incorrect?: string;
+    level?: string;
+    xp?: string;
   }>();
+  const { returnJobId, returnSectorId, fromQuiz } = params;
 
   const [selected, setSelected] = useState<'monthly' | 'annual'>('annual');
 
@@ -61,7 +70,20 @@ export default function SubscriptionScreen() {
 
   const handleSubscribe = () => router.replace('/signup' as any);
   const handleSkip = () => {
-    if (returnJobId && returnSectorId) {
+    if (fromQuiz === 'true') {
+      router.replace({
+        pathname: '/result',
+        params: {
+          jobId:     params.jobId     ?? '',
+          sectorId:  params.sectorId  ?? '',
+          total:     params.total     ?? '0',
+          correct:   params.correct   ?? '0',
+          incorrect: params.incorrect ?? '0',
+          level:     params.level     ?? '1',
+          xp:        params.xp        ?? '0',
+        },
+      } as any);
+    } else if (returnJobId && returnSectorId) {
       router.replace({
         pathname: '/levels',
         params: { jobId: returnJobId, sectorId: returnSectorId },
