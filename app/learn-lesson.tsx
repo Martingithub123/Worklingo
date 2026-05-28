@@ -387,7 +387,7 @@ export default function LearnLessonScreen() {
         );
       })()}
 
-      {/* ── Quiz step (fill-in-the-blank) ── */}
+      {/* ── Quiz step (Duolingo style: native word → pick target language word) ── */}
       {isQuiz && (
         <Animated.View
           style={[
@@ -398,42 +398,28 @@ export default function LearnLessonScreen() {
             },
           ]}
         >
-          {/* Instruction label */}
+          {/* Instruction */}
           <Text style={[styles.instructionLabel, { color: colors.textSecondary }]}>
-            {t.fillInBlank}
+            {t.howDoYouSay ?? 'How do you say this?'}
           </Text>
 
-          {/* Sentence card with blank */}
+          {/* Native word card — big, clear prompt */}
           <View style={[styles.sentenceCard, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
-            <View style={styles.sentenceTopRow}>
-              <Text style={styles.sentenceEmoji}>{step.item.emoji}</Text>
-              <TouchableOpacity
-                style={[styles.speakBtnSmall, { backgroundColor: colors.surface }]}
-                onPress={() => speakWord(step.item.w[target], target)}
-                activeOpacity={0.7}
-                hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-              >
-                <Volume2 size={16} color={colors.textSecondary} strokeWidth={2} />
-              </TouchableOpacity>
-            </View>
-            <Text style={[styles.sentenceText, { color: colors.text }]}>
-              {sentenceParts[0]}
-              <Text
-                style={[
-                  styles.blankWord,
-                  {
-                    color: blankColor,
-                    backgroundColor: blankColor + '18',
-                  },
-                ]}
-              >
-                {filledWord ?? '  _ _ _ _  '}
-              </Text>
-              {sentenceParts[1] ?? ''}
+            <Text style={styles.sentenceEmoji}>{step.item.emoji}</Text>
+            <Text style={[styles.nativeWordText, { color: colors.text }]}>
+              {step.nativeWord}
             </Text>
+            <TouchableOpacity
+              style={[styles.speakBtnSmall, { backgroundColor: colors.surface, marginTop: 8 }]}
+              onPress={() => speakWord(step.item.w[target], target)}
+              activeOpacity={0.7}
+              hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+            >
+              <Volume2 size={16} color={colors.textSecondary} strokeWidth={2} />
+            </TouchableOpacity>
           </View>
 
-          {/* Word tiles — 2×2 grid */}
+          {/* Word tiles — 2×2 grid (all in target language) */}
           <View style={styles.tilesGrid}>
             {step.options.map((opt, i) => {
               const isCorrect  = i === step.correctIdx;
@@ -450,12 +436,9 @@ export default function LearnLessonScreen() {
                 } else if (isSelected) {
                   bg = '#FF4B4B22'; border = '#FF4B4B'; txtCol = '#FF4B4B';
                 }
-              } else {
-                // highlight selected tile while unanswered (pre-answer tap)
-                if (isSelected) {
-                  bg = (level?.color ?? Colors.primaryGlow) + '22';
-                  border = level?.color ?? Colors.primaryGlow;
-                }
+              } else if (isSelected) {
+                bg = (level?.color ?? Colors.primaryGlow) + '22';
+                border = level?.color ?? Colors.primaryGlow;
               }
 
               return (
@@ -467,12 +450,8 @@ export default function LearnLessonScreen() {
                   disabled={answered}
                 >
                   <Text style={[styles.tileText, { color: txtCol }]} numberOfLines={2}>{opt}</Text>
-                  {answered && isCorrect && (
-                    <Text style={styles.tileCheck}>✓</Text>
-                  )}
-                  {answered && isSelected && !isCorrect && (
-                    <Text style={styles.tileX}>✗</Text>
-                  )}
+                  {answered && isCorrect && <Text style={styles.tileCheck}>✓</Text>}
+                  {answered && isSelected && !isCorrect && <Text style={styles.tileX}>✗</Text>}
                 </TouchableOpacity>
               );
             })}
@@ -593,25 +572,16 @@ const styles = StyleSheet.create({
   sentenceCard: {
     borderRadius: Radius.xl, borderWidth: 1.5,
     paddingVertical: Spacing.lg, paddingHorizontal: Spacing.lg,
-    alignItems: 'center', gap: 10,
+    alignItems: 'center', gap: 8,
   },
-  sentenceTopRow: {
-    flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 12,
+  sentenceEmoji: { fontSize: 48 },
+  nativeWordText: {
+    fontSize: 32, fontFamily: 'Poppins-ExtraBold',
+    textAlign: 'center', letterSpacing: -0.5,
   },
-  sentenceEmoji: { fontSize: 44 },
   speakBtnSmall: {
     width: 32, height: 32, borderRadius: 16,
     alignItems: 'center', justifyContent: 'center',
-  },
-  sentenceText: {
-    fontSize: 18, fontFamily: 'Poppins-SemiBold',
-    textAlign: 'center', lineHeight: 28,
-  },
-  blankWord: {
-    fontSize: 18, fontFamily: 'Poppins-ExtraBold',
-    textDecorationLine: 'underline',
-    borderRadius: 4,
-    paddingHorizontal: 4,
   },
 
   // Word tiles

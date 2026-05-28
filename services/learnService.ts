@@ -5,7 +5,7 @@ export interface VocabItem { id: string; emoji: string; w: LangMap; }
 export interface LearnTopic { id: string; emoji: string; title: string; items: VocabItem[]; }
 export interface LearnLevel { level: 1|2|3|4|5|6; title: string; emoji: string; color: string; topics: LearnTopic[]; }
 export type StepCard = { type: 'card'; item: VocabItem };
-export type StepQuiz = { type: 'quiz'; item: VocabItem; sentence: string; options: string[]; correctIdx: number; };
+export type StepQuiz = { type: 'quiz'; item: VocabItem; nativeWord: string; options: string[]; correctIdx: number; };
 export type LessonStep = StepCard | StepQuiz;
 
 const SUPPORTED: LangCode[] = ['en','es','pt','fr','de','it','nl','zh','ja','ru'];
@@ -1121,26 +1121,27 @@ function shuffle<T>(arr: T[]): T[] {
 function buildQuiz(
   item: VocabItem,
   target: LangCode,
+  home: LangCode,
   pool: VocabItem[],
-  sentenceBank: Record<string, string>,
 ): StepQuiz {
-  const sentence = sentenceBank[item.id] ?? SENTENCES[item.id] ?? `${item.emoji} ___`;
   const correctWord = item.w[target];
+  const nativeWord  = item.w[home] !== correctWord ? item.w[home] : item.w['en'];
   const distractors = shuffle(pool.filter(d => d.w[target] !== correctWord)).slice(0, 3);
   const distractWords = distractors.map(d => d.w[target]);
   const options = shuffle([correctWord, ...distractWords]);
-  return { type: 'quiz', item, sentence, options, correctIdx: options.indexOf(correctWord) };
+  return { type: 'quiz', item, nativeWord, options, correctIdx: options.indexOf(correctWord) };
 }
 
 export function generateLesson(
   levelIdx: number,
   topicIdx: number,
   targetLang: string,
-  _homeLang: string,
+  homeLang: string,
 ): LessonStep[] {
   const level = LEARN_LEVELS[levelIdx];
   const topic = level.topics[topicIdx];
   const target = dl(targetLang);
+  const home   = dl(homeLang);
 
   // All 10 items shuffled
   const items = shuffle(topic.items);
@@ -1151,9 +1152,6 @@ export function generateLesson(
     .filter(t => t.id !== topic.id)
     .flatMap(t => t.items);
 
-  const sentenceBank: Record<string, string> =
-    (SENTENCES_I18N as Record<string, Record<string, string>>)[target] ?? SENTENCES;
-
   const steps: LessonStep[] = [];
 
   // Phase 1 — Learn: flashcard for all 10 words
@@ -1161,9 +1159,9 @@ export function generateLesson(
     steps.push({ type: 'card', item });
   }
 
-  // Phase 2 — Practice: quiz all 10 words with unique sentences
+  // Phase 2 — Practice (Duolingo style): show native word → pick target language word
   for (const item of shuffle(items)) {
-    steps.push(buildQuiz(item, target, pool, sentenceBank));
+    steps.push(buildQuiz(item, target, home, pool));
   }
 
   return steps; // 10 flashcards + 10 quizzes = 20 unique steps

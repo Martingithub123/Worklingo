@@ -79,6 +79,7 @@ export interface AppStrings {
   back: string;
   // learn mode screens
   fillInBlank: string;
+  howDoYouSay: string;
   tapToContinue: string;
   lessonComplete: string;
   xpEarned: string;
@@ -185,6 +186,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: 'CREATING ACCOUNT…',
     continue: 'Continue',
     fillInBlank: 'Fill in the missing word',
+    howDoYouSay: 'How do you say this?',
     tapToContinue: 'Tap to continue →',
     lessonComplete: 'Lesson Complete!',
     xpEarned: 'XP EARNED',
@@ -289,6 +291,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: 'CRIANDO CONTA…',
     continue: 'Continuar',
     fillInBlank: 'Preencha a palavra que falta',
+    howDoYouSay: 'Como se diz isso?'
     tapToContinue: 'Toque para continuar →',
     lessonComplete: 'Lição Concluída!',
     xpEarned: 'XP GANHO',
@@ -393,6 +396,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: 'A CRIAR CONTA…',
     continue: 'Continuar',
     fillInBlank: 'Preencha a palavra em falta',
+    howDoYouSay: 'Como se diz isto?'
     tapToContinue: 'Toque para continuar →',
     lessonComplete: 'Lição Concluída!',
     xpEarned: 'XP GANHO',
@@ -497,6 +501,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: 'CREANDO CUENTA…',
     continue: 'Continuar',
     fillInBlank: 'Completa la palabra que falta',
+    howDoYouSay: '¿Cómo se dice esto?'
     tapToContinue: 'Toca para continuar →',
     lessonComplete: '¡Lección Completada!',
     xpEarned: 'XP GANADO',
@@ -601,6 +606,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: 'CRÉATION DU COMPTE…',
     continue: 'Continuer',
     fillInBlank: 'Complétez le mot manquant',
+    howDoYouSay: 'Comment dit-on cela ?'
     tapToContinue: 'Appuyez pour continuer →',
     lessonComplete: 'Leçon Terminée !',
     xpEarned: 'XP GAGNÉ',
@@ -705,6 +711,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: 'KONTO WIRD ERSTELLT…',
     continue: 'Weiter',
     fillInBlank: 'Ergänze das fehlende Wort',
+    howDoYouSay: 'Wie sagt man das?'
     tapToContinue: 'Tippen zum Fortfahren →',
     lessonComplete: 'Lektion Abgeschlossen!',
     xpEarned: 'XP VERDIENT',
@@ -809,6 +816,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: 'CREAZIONE ACCOUNT…',
     continue: 'Continua',
     fillInBlank: 'Inserisci la parola mancante',
+    howDoYouSay: 'Come si dice?'
     tapToContinue: 'Tocca per continuare →',
     lessonComplete: 'Lezione Completata!',
     xpEarned: 'XP GUADAGNATO',
@@ -913,6 +921,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: 'ACCOUNT AANMAKEN…',
     continue: 'Doorgaan',
     fillInBlank: 'Vul het ontbrekende woord in',
+    howDoYouSay: 'Hoe zeg je dit?'
     tapToContinue: 'Tik om door te gaan →',
     lessonComplete: 'Les Voltooid!',
     xpEarned: 'XP VERDIEND',
@@ -1017,6 +1026,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: 'СОЗДАЮ АККАУНТ…',
     continue: 'Продолжить',
     fillInBlank: 'Заполните пропущенное слово',
+    howDoYouSay: 'Как это сказать?'
     tapToContinue: 'Нажмите для продолжения →',
     lessonComplete: 'Урок Завершён!',
     xpEarned: 'ОЧК ЗАРАБОТАНО',
@@ -1121,6 +1131,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: '创建账户中…',
     continue: '继续',
     fillInBlank: '填写缺失的单词',
+    howDoYouSay: '这怎么说？'
     tapToContinue: '点击继续 →',
     lessonComplete: '课程完成！',
     xpEarned: '获得XP',
@@ -1225,6 +1236,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: 'アカウント作成中…',
     continue: '続ける',
     fillInBlank: '空欄に当てはまる言葉を選ぼう',
+    howDoYouSay: 'これは何と言いますか？'
     tapToContinue: 'タップして続ける →',
     lessonComplete: 'レッスン完了！',
     xpEarned: 'XP獲得',
@@ -1329,6 +1341,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: '계정 생성 중…',
     continue: '계속',
     fillInBlank: '빈칸에 맞는 단어를 채우세요',
+    howDoYouSay: '이것을 어떻게 말하나요?',
     tapToContinue: '탭하여 계속하기 →',
     lessonComplete: '수업 완료!',
     xpEarned: 'XP 획득',
