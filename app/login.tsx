@@ -22,6 +22,7 @@ export default function LoginScreen() {
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [cooldown, setCooldown] = useState(false);
 
   // Animations
   const formOp   = useRef(new Animated.Value(0)).current;
@@ -39,6 +40,8 @@ export default function LoginScreen() {
   }, []);
 
   const handleLogin = async () => {
+    if (loading || cooldown) return;
+
     Animated.sequence([
       Animated.spring(btnScale, { toValue: 0.96, useNativeDriver: true, speed: 50, bounciness: 4 }),
       Animated.spring(btnScale, { toValue: 1,    useNativeDriver: true, speed: 50, bounciness: 4 }),
@@ -53,8 +56,13 @@ export default function LoginScreen() {
     setLoading(true); setError('');
     const { error } = await signIn(email.trim(), password);
     setLoading(false);
-    if (error) setError(error);
-    else router.replace('/language' as any);
+    if (error) {
+      setError(error);
+      setCooldown(true);
+      setTimeout(() => setCooldown(false), 3000);
+    } else {
+      router.replace('/language' as any);
+    }
   };
 
   return (
@@ -133,10 +141,10 @@ export default function LoginScreen() {
             {/* Login button */}
             <Animated.View style={{ transform: [{ scale: btnScale }] }}>
               <TouchableOpacity
-                style={[styles.primaryBtn, loading && { opacity: 0.7 }]}
+                style={[styles.primaryBtn, (loading || cooldown) && { opacity: 0.7 }]}
                 onPress={handleLogin}
                 activeOpacity={0.85}
-                disabled={loading}
+                disabled={loading || cooldown}
               >
                 <Text style={styles.primaryBtnText}>{loading ? t.loggingIn : t.logIn}</Text>
               </TouchableOpacity>

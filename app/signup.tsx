@@ -24,6 +24,7 @@ export default function SignUpScreen() {
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [cooldown, setCooldown] = useState(false);
 
   const mascotOp = useRef(new Animated.Value(0)).current;
   const mascotSc = useRef(new Animated.Value(0.8)).current;
@@ -50,6 +51,8 @@ export default function SignUpScreen() {
   }, []);
 
   const handleSignUp = async () => {
+    if (loading || cooldown) return;
+
     Animated.sequence([
       Animated.spring(btnScale, { toValue: 0.96, useNativeDriver: true, speed: 50, bounciness: 4 }),
       Animated.spring(btnScale, { toValue: 1,    useNativeDriver: true, speed: 50, bounciness: 4 }),
@@ -64,10 +67,21 @@ export default function SignUpScreen() {
     if (password.length < 8) {
       setError('Password must be at least 8 characters.'); return;
     }
+    if (!/[A-Z]/.test(password)) {
+      setError('Password must contain at least one uppercase letter.'); return;
+    }
+    if (!/[0-9]/.test(password)) {
+      setError('Password must contain at least one number.'); return;
+    }
     setLoading(true); setError('');
     const { error } = await signUp(email.trim(), password, name.trim());
     setLoading(false);
-    if (error) { setError(error); return; }
+    if (error) {
+      setError(error);
+      setCooldown(true);
+      setTimeout(() => setCooldown(false), 3000);
+      return;
+    }
     await AsyncStorage.multiSet([
       ['targetLanguage', language],
       ['referralSource', referralSource],
@@ -168,10 +182,10 @@ export default function SignUpScreen() {
             {/* Sign up button */}
             <Animated.View style={{ transform: [{ scale: btnScale }] }}>
               <TouchableOpacity
-                style={[styles.primaryBtn, loading && { opacity: 0.7 }]}
+                style={[styles.primaryBtn, (loading || cooldown) && { opacity: 0.7 }]}
                 onPress={handleSignUp}
                 activeOpacity={0.85}
-                disabled={loading}
+                disabled={loading || cooldown}
               >
                 <Text style={styles.primaryBtnText}>{loading ? t.creatingAccount : t.createAccountCta}</Text>
               </TouchableOpacity>

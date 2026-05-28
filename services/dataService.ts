@@ -5,6 +5,14 @@ import { Job, Sector, Role, VocabularyItem, QuizQuestion, Language, LevelType } 
 
 const CACHE_KEY = 'beefluent_vocab_v2';
 
+function fisherYates<T>(arr: T[]): T[] {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 // In-memory store — starts with local bundle, updated by init()
 let JOBS: Job[] = LOCAL_JOBS;
 
@@ -140,14 +148,14 @@ export const dataService = {
 
     const itemPool: VocabularyItem[] = [];
     while (itemPool.length < QUIZ_LENGTH) {
-      itemPool.push(...[...allItems].sort(() => Math.random() - 0.5));
+      itemPool.push(...fisherYates([...allItems]));
     }
     const quizItems = itemPool.slice(0, QUIZ_LENGTH);
 
     return quizItems.map(item => {
       const otherItems = allItems.filter(i => i.id !== item.id);
-      const distractors = [...otherItems].sort(() => Math.random() - 0.5).slice(0, optionCount - 1);
-      const allOptionItems = [...distractors, item].sort(() => Math.random() - 0.5);
+      const distractors = fisherYates([...otherItems]).slice(0, optionCount - 1);
+      const allOptionItems = fisherYates([...distractors, item]);
       const options = allOptionItems.map(i => this.getTranslation(i, language));
       return {
         item,
