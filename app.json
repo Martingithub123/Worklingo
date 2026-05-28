@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "BeeFluent",
-    "slug": "beefluent",
+    "name": "FluentBee",
+    "slug": "fluentbee",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "beefluent",
+    "scheme": "fluentbee",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
@@ -13,12 +13,16 @@
     },
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.irissalgado.beefluent",
+      "bundleIdentifier": "com.irissalgado.fluentbee",
       "buildNumber": "1"
     },
     "android": {
-      "package": "com.beefluent.app",
-      "versionCode": 1
+      "package": "com.irissalgado.fluentbee",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#1E7214"
+      }
     },
     "web": {
       "bundler": "metro",
