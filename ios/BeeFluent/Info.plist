@@ -27,8 +27,8 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>beefluent</string>
-          <string>com.irissalgado.beefluent</string>
+          <string>fluentbee</string>
+          <string>com.irissalgado.fluentbee</string>
         </array>
       </dict>
     </array>

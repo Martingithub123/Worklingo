@@ -85,7 +85,7 @@ const SECTIONS: Section[] = [
   {
     title: '14. Contact Us',
     body:
-      'If you have questions about these Terms and Conditions, please contact us at support@beefluent.app. We aim to respond to all inquiries within 5 business days.',
+      'If you have questions about these Terms and Conditions, please contact us at support@fluentbee.app. We aim to respond to all inquiries within 5 business days.',
   },
 ];
 

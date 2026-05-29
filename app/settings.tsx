@@ -16,7 +16,7 @@ import {
 } from 'lucide-react-native';
 
 const APP_VERSION = '1.0.0';
-const SUPPORT_EMAIL = 'support@beefluent.app';
+const SUPPORT_EMAIL = 'support@fluentbee.app';
 
 export default function SettingsScreen() {
   const { uiLanguage, colors } = useApp();

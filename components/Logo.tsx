@@ -12,7 +12,7 @@ export function Logo({ size = 80, showText = false }: LogoProps) {
     <View style={styles.container}>
       <BeeMascot size={size} />
       {showText && (
-        <Text style={[styles.logoText, { fontSize: size * 0.3 }]}>BeeFluent</Text>
+        <Text style={[styles.logoText, { fontSize: size * 0.3 }]}>FluentBee</Text>
       )}
     </View>
   );
