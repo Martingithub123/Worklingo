@@ -10,7 +10,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		308EC7D919DA79842338D31F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = EA8429D06B669A2C3C8C4A84 /* PrivacyInfo.xcprivacy */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		B645C0A2D8F4A4BE18FBA306 /* libPods-BeeFluent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B78339FA174F902228EFE99A /* libPods-BeeFluent.a */; };
+		B645C0A2D8F4A4BE18FBA306 /* libPods-FluentBee.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B78339FA174F902228EFE99A /* libPods-FluentBee.a */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
 		E370264EB159B6D1FD83E9EB /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CB3FA7730441C8DCB37D62 /* ExpoModulesProvider.swift */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
@@ -18,18 +18,18 @@
 
 /* Begin PBXFileReference section */
 		13B07F961A680F5B00A75B9A /* BeeFluent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeeFluent.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BeeFluent/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BeeFluent/Info.plist; sourceTree = "<group>"; };
-		34CB3FA7730441C8DCB37D62 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-BeeFluent/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
-		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = BeeFluent/SplashScreen.storyboard; sourceTree = "<group>"; };
-		B78339FA174F902228EFE99A /* libPods-BeeFluent.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BeeFluent.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = FluentBee/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FluentBee/Info.plist; sourceTree = "<group>"; };
+		34CB3FA7730441C8DCB37D62 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-FluentBee/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = FluentBee/SplashScreen.storyboard; sourceTree = "<group>"; };
+		B78339FA174F902228EFE99A /* libPods-FluentBee.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FluentBee.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
-		BF3DD62BFFEB460DA0F7AA31 /* Pods-BeeFluent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeeFluent.release.xcconfig"; path = "Target Support Files/Pods-BeeFluent/Pods-BeeFluent.release.xcconfig"; sourceTree = "<group>"; };
-		EA8429D06B669A2C3C8C4A84 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = BeeFluent/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		BF3DD62BFFEB460DA0F7AA31 /* Pods-FluentBee.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FluentBee.release.xcconfig"; path = "Target Support Files/Pods-FluentBee/Pods-FluentBee.release.xcconfig"; sourceTree = "<group>"; };
+		EA8429D06B669A2C3C8C4A84 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = FluentBee/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = BeeFluent/AppDelegate.swift; sourceTree = "<group>"; };
-		F11748442D0722820044C1D9 /* BeeFluent-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "BeeFluent-Bridging-Header.h"; path = "BeeFluent/BeeFluent-Bridging-Header.h"; sourceTree = "<group>"; };
-		F2660448D9C92CE5CA4815AE /* Pods-BeeFluent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeeFluent.debug.xcconfig"; path = "Target Support Files/Pods-BeeFluent/Pods-BeeFluent.debug.xcconfig"; sourceTree = "<group>"; };
+		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = FluentBee/AppDelegate.swift; sourceTree = "<group>"; };
+		F11748442D0722820044C1D9 /* FluentBee-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "FluentBee-Bridging-Header.h"; path = "FluentBee/FluentBee-Bridging-Header.h"; sourceTree = "<group>"; };
+		F2660448D9C92CE5CA4815AE /* Pods-FluentBee.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FluentBee.debug.xcconfig"; path = "Target Support Files/Pods-FluentBee/Pods-FluentBee.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,40 +37,40 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B645C0A2D8F4A4BE18FBA306 /* libPods-BeeFluent.a in Frameworks */,
+				B645C0A2D8F4A4BE18FBA306 /* libPods-FluentBee.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0A75F67AAC5674625200EF99 /* BeeFluent */ = {
+		0A75F67AAC5674625200EF99 /* FluentBee */ = {
 			isa = PBXGroup;
 			children = (
 				34CB3FA7730441C8DCB37D62 /* ExpoModulesProvider.swift */,
 			);
-			name = BeeFluent;
+			name = FluentBee;
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* BeeFluent */ = {
+		13B07FAE1A68108700A75B9A /* FluentBee */ = {
 			isa = PBXGroup;
 			children = (
 				F11748412D0307B40044C1D9 /* AppDelegate.swift */,
-				F11748442D0722820044C1D9 /* BeeFluent-Bridging-Header.h */,
+				F11748442D0722820044C1D9 /* FluentBee-Bridging-Header.h */,
 				BB2F792B24A3F905000567C9 /* Supporting */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
 				EA8429D06B669A2C3C8C4A84 /* PrivacyInfo.xcprivacy */,
 			);
-			name = BeeFluent;
+			name = FluentBee;
 			sourceTree = "<group>";
 		};
 		1D839A34EBFB4F10F7D52698 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F2660448D9C92CE5CA4815AE /* Pods-BeeFluent.debug.xcconfig */,
-				BF3DD62BFFEB460DA0F7AA31 /* Pods-BeeFluent.release.xcconfig */,
+				F2660448D9C92CE5CA4815AE /* Pods-FluentBee.debug.xcconfig */,
+				BF3DD62BFFEB460DA0F7AA31 /* Pods-FluentBee.release.xcconfig */,
 			);
 			name = Pods;
 			path = Pods;
@@ -80,7 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				B78339FA174F902228EFE99A /* libPods-BeeFluent.a */,
+				B78339FA174F902228EFE99A /* libPods-FluentBee.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -95,7 +95,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* BeeFluent */,
+				13B07FAE1A68108700A75B9A /* FluentBee */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
@@ -118,7 +118,7 @@
 		B9A4C0FCC7552D5047887F39 /* ExpoModulesProviders */ = {
 			isa = PBXGroup;
 			children = (
-				0A75F67AAC5674625200EF99 /* BeeFluent */,
+				0A75F67AAC5674625200EF99 /* FluentBee */,
 			);
 			name = ExpoModulesProviders;
 			sourceTree = "<group>";
@@ -129,15 +129,15 @@
 				BB2F792C24A3F905000567C9 /* Expo.plist */,
 			);
 			name = Supporting;
-			path = BeeFluent/Supporting;
+			path = FluentBee/Supporting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		13B07F861A680F5B00A75B9A /* BeeFluent */ = {
+		13B07F861A680F5B00A75B9A /* FluentBee */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "BeeFluent" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "FluentBee" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
 				15FA2EB632C7935A281DE02D /* [Expo] Configure project */,
@@ -152,8 +152,8 @@
 			);
 			dependencies = (
 			);
-			name = BeeFluent;
-			productName = BeeFluent;
+			name = FluentBee;
+			productName = FluentBee;
 			productReference = 13B07F961A680F5B00A75B9A /* BeeFluent.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -170,7 +170,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "BeeFluent" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "FluentBee" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -183,7 +183,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* BeeFluent */,
+				13B07F861A680F5B00A75B9A /* FluentBee */,
 			);
 		};
 /* End PBXProject section */
@@ -235,7 +235,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-BeeFluent-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-FluentBee-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -253,18 +253,18 @@
 			inputPaths = (
 				"$(SRCROOT)/.xcode.env",
 				"$(SRCROOT)/.xcode.env.local",
-				"$(SRCROOT)/BeeFluent/BeeFluent.entitlements",
-				"$(SRCROOT)/Pods/Target Support Files/Pods-BeeFluent/expo-configure-project.sh",
+				"$(SRCROOT)/FluentBee/FluentBee.entitlements",
+				"$(SRCROOT)/Pods/Target Support Files/Pods-FluentBee/expo-configure-project.sh",
 			);
 			name = "[Expo] Configure project";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(SRCROOT)/Pods/Target Support Files/Pods-BeeFluent/ExpoModulesProvider.swift",
+				"$(SRCROOT)/Pods/Target Support Files/Pods-FluentBee/ExpoModulesProvider.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-BeeFluent/expo-configure-project.sh\"\n";
+			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-FluentBee/expo-configure-project.sh\"\n";
 		};
 		800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -272,7 +272,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BeeFluent/Pods-BeeFluent-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-FluentBee/Pods-FluentBee-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants/EXConstants.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants/ExpoConstants_privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/ExpoFileSystem/ExpoFileSystem_privacy.bundle",
@@ -295,7 +295,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BeeFluent/Pods-BeeFluent-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FluentBee/Pods-FluentBee-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E616C17C725435819C4EBE52 /* [CP] Embed Pods Frameworks */ = {
@@ -304,7 +304,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BeeFluent/Pods-BeeFluent-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-FluentBee/Pods-FluentBee-frameworks.sh",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/React-Core-prebuilt/React.framework/React",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ReactNativeDependencies/ReactNativeDependencies.framework/ReactNativeDependencies",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
@@ -317,7 +317,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BeeFluent/Pods-BeeFluent-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FluentBee/Pods-FluentBee-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -337,11 +337,11 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2660448D9C92CE5CA4815AE /* Pods-BeeFluent.debug.xcconfig */;
+			baseConfigurationReference = F2660448D9C92CE5CA4815AE /* Pods-FluentBee.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = BeeFluent/BeeFluent.entitlements;
+				CODE_SIGN_ENTITLEMENTS = FluentBee/FluentBee.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2448JHMH2Z;
 				ENABLE_BITCODE = NO;
@@ -349,7 +349,7 @@
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",
 				);
-				INFOPLIST_FILE = BeeFluent/Info.plist;
+				INFOPLIST_FILE = FluentBee/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -364,7 +364,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.irissalgado.fluentbee;
 				PRODUCT_NAME = "FluentBee";
-				SWIFT_OBJC_BRIDGING_HEADER = "BeeFluent/BeeFluent-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "FluentBee/FluentBee-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1";
@@ -374,14 +374,14 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF3DD62BFFEB460DA0F7AA31 /* Pods-BeeFluent.release.xcconfig */;
+			baseConfigurationReference = BF3DD62BFFEB460DA0F7AA31 /* Pods-FluentBee.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = BeeFluent/BeeFluent.entitlements;
+				CODE_SIGN_ENTITLEMENTS = FluentBee/FluentBee.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2448JHMH2Z;
-				INFOPLIST_FILE = BeeFluent/Info.plist;
+				INFOPLIST_FILE = FluentBee/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -396,7 +396,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.irissalgado.fluentbee;
 				PRODUCT_NAME = "FluentBee";
-				SWIFT_OBJC_BRIDGING_HEADER = "BeeFluent/BeeFluent-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "FluentBee/FluentBee-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -524,7 +524,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "BeeFluent" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "FluentBee" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -533,7 +533,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "BeeFluent" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "FluentBee" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
