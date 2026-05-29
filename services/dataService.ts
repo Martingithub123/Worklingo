@@ -3,7 +3,7 @@ import { supabase } from '@/lib/supabase';
 import { JOBS as LOCAL_JOBS } from '@/data/vocabularyData';
 import { Job, Sector, Role, VocabularyItem, QuizQuestion, Language, LevelType } from '@/types';
 
-const CACHE_KEY = 'beefluent_vocab_v2';
+const CACHE_KEY = 'fluentbee_vocab_v1';
 
 function fisherYates<T>(arr: T[]): T[] {
   for (let i = arr.length - 1; i > 0; i--) {

@@ -49,7 +49,7 @@ function sqlJson(obj) {
 
 const lines = [];
 lines.push('-- ============================================================');
-lines.push('-- BeeFluent Vocabulary Seed Data');
+lines.push('-- FluentBee Vocabulary Seed Data');
 lines.push('-- Run this AFTER 01_schema.sql in the Supabase SQL Editor');
 lines.push('-- ============================================================');
 lines.push('');

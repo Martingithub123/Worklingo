@@ -1,8 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const KEYS = {
-  PENDING: 'beefluent_pending_progress',
-  XP:      'beefluent_xp_',
+  PENDING: 'fluentbee_pending_progress',
+  XP:      'fluentbee_xp_',
 };
 
 export interface PendingEntry {
