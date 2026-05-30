@@ -291,7 +291,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: 'CRIANDO CONTA…',
     continue: 'Continuar',
     fillInBlank: 'Preencha a palavra que falta',
-    howDoYouSay: 'Como se diz isso?'
+    howDoYouSay: 'Como se diz isso?',
     tapToContinue: 'Toque para continuar →',
     lessonComplete: 'Lição Concluída!',
     xpEarned: 'XP GANHO',
@@ -396,7 +396,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: 'A CRIAR CONTA…',
     continue: 'Continuar',
     fillInBlank: 'Preencha a palavra em falta',
-    howDoYouSay: 'Como se diz isto?'
+    howDoYouSay: 'Como se diz isto?',
     tapToContinue: 'Toque para continuar →',
     lessonComplete: 'Lição Concluída!',
     xpEarned: 'XP GANHO',
@@ -501,7 +501,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: 'CREANDO CUENTA…',
     continue: 'Continuar',
     fillInBlank: 'Completa la palabra que falta',
-    howDoYouSay: '¿Cómo se dice esto?'
+    howDoYouSay: '¿Cómo se dice esto?',
     tapToContinue: 'Toca para continuar →',
     lessonComplete: '¡Lección Completada!',
     xpEarned: 'XP GANADO',
@@ -606,7 +606,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: 'CRÉATION DU COMPTE…',
     continue: 'Continuer',
     fillInBlank: 'Complétez le mot manquant',
-    howDoYouSay: 'Comment dit-on cela ?'
+    howDoYouSay: 'Comment dit-on cela ?',
     tapToContinue: 'Appuyez pour continuer →',
     lessonComplete: 'Leçon Terminée !',
     xpEarned: 'XP GAGNÉ',
@@ -711,7 +711,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: 'KONTO WIRD ERSTELLT…',
     continue: 'Weiter',
     fillInBlank: 'Ergänze das fehlende Wort',
-    howDoYouSay: 'Wie sagt man das?'
+    howDoYouSay: 'Wie sagt man das?',
     tapToContinue: 'Tippen zum Fortfahren →',
     lessonComplete: 'Lektion Abgeschlossen!',
     xpEarned: 'XP VERDIENT',
@@ -816,7 +816,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: 'CREAZIONE ACCOUNT…',
     continue: 'Continua',
     fillInBlank: 'Inserisci la parola mancante',
-    howDoYouSay: 'Come si dice?'
+    howDoYouSay: 'Come si dice?',
     tapToContinue: 'Tocca per continuare →',
     lessonComplete: 'Lezione Completata!',
     xpEarned: 'XP GUADAGNATO',
@@ -921,7 +921,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: 'ACCOUNT AANMAKEN…',
     continue: 'Doorgaan',
     fillInBlank: 'Vul het ontbrekende woord in',
-    howDoYouSay: 'Hoe zeg je dit?'
+    howDoYouSay: 'Hoe zeg je dit?',
     tapToContinue: 'Tik om door te gaan →',
     lessonComplete: 'Les Voltooid!',
     xpEarned: 'XP VERDIEND',
@@ -1026,7 +1026,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: 'СОЗДАЮ АККАУНТ…',
     continue: 'Продолжить',
     fillInBlank: 'Заполните пропущенное слово',
-    howDoYouSay: 'Как это сказать?'
+    howDoYouSay: 'Как это сказать?',
     tapToContinue: 'Нажмите для продолжения →',
     lessonComplete: 'Урок Завершён!',
     xpEarned: 'ОЧК ЗАРАБОТАНО',
@@ -1131,7 +1131,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: '创建账户中…',
     continue: '继续',
     fillInBlank: '填写缺失的单词',
-    howDoYouSay: '这怎么说？'
+    howDoYouSay: '这怎么说？',
     tapToContinue: '点击继续 →',
     lessonComplete: '课程完成！',
     xpEarned: '获得XP',
@@ -1236,7 +1236,7 @@ const strings: Record<string, AppStrings> = {
     creatingAccount: 'アカウント作成中…',
     continue: '続ける',
     fillInBlank: '空欄に当てはまる言葉を選ぼう',
-    howDoYouSay: 'これは何と言いますか？'
+    howDoYouSay: 'これは何と言いますか？',
     tapToContinue: 'タップして続ける →',
     lessonComplete: 'レッスン完了！',
     xpEarned: 'XP獲得',
@@ -1480,6 +1480,7 @@ const strings: Record<string, AppStrings> = {
     termsConditions: 'الشروط والأحكام',
     contactSupport: 'تواصل مع الدعم',
     changeNativeLanguage: 'تغيير اللغة الأم',
+    howDoYouSay: 'كيف تقول هذا؟',
     signOut: 'تسجيل الخروج',
   },
 
@@ -1584,6 +1585,7 @@ const strings: Record<string, AppStrings> = {
     termsConditions: 'नियम और शर्तें',
     contactSupport: 'सहायता से संपर्क',
     changeNativeLanguage: 'मातृभाषा बदलें',
+    howDoYouSay: 'आप इसे कैसे कहते हैं?',
     signOut: 'साइन आउट',
   },
 
@@ -1688,6 +1690,7 @@ const strings: Record<string, AppStrings> = {
     termsConditions: 'Şartlar ve Koşullar',
     contactSupport: 'Destek ile İletişim',
     changeNativeLanguage: 'Ana Dili Değiştir',
+    howDoYouSay: 'Bunu nasıl söylersiniz?',
     signOut: 'Çıkış Yap',
   },
 
@@ -1792,6 +1795,7 @@ const strings: Record<string, AppStrings> = {
     termsConditions: 'Regulamin',
     contactSupport: 'Kontakt z pomocą',
     changeNativeLanguage: 'Zmień język ojczysty',
+    howDoYouSay: 'Jak to powiedzieć?',
     signOut: 'Wyloguj się',
   },
 
@@ -1896,6 +1900,7 @@ const strings: Record<string, AppStrings> = {
     termsConditions: 'Syarat & Ketentuan',
     contactSupport: 'Hubungi Dukungan',
     changeNativeLanguage: 'Ubah Bahasa Asli',
+    howDoYouSay: 'Bagaimana cara mengatakannya?',
     signOut: 'Keluar',
   },
 
@@ -2000,6 +2005,7 @@ const strings: Record<string, AppStrings> = {
     termsConditions: 'Điều khoản & Điều kiện',
     contactSupport: 'Liên hệ hỗ trợ',
     changeNativeLanguage: 'Thay đổi ngôn ngữ mẹ đẻ',
+    howDoYouSay: 'Bạn nói điều này như thế nào?',
     signOut: 'Đăng xuất',
   },
 
@@ -2104,6 +2110,7 @@ const strings: Record<string, AppStrings> = {
     termsConditions: 'Умови використання',
     contactSupport: "Зв'язатися з підтримкою",
     changeNativeLanguage: 'Змінити рідну мову',
+    howDoYouSay: 'Як це сказати?',
     signOut: 'Вийти',
   },
 
@@ -2208,6 +2215,7 @@ const strings: Record<string, AppStrings> = {
     termsConditions: 'Villkor',
     contactSupport: 'Kontakta support',
     changeNativeLanguage: 'Ändra modersmål',
+    howDoYouSay: 'Hur säger man detta?',
     signOut: 'Logga ut',
   },
 };

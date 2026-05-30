@@ -150,7 +150,7 @@ export default function QuizScreen() {
             if (subscribed === 'true') {
               router.replace({ pathname: '/result', params: resultParams });
             } else {
-              router.replace({ pathname: '/subscription', params: { ...resultParams, fromQuiz: 'true' } });
+              router.replace({ pathname: '/subscription' as any, params: { ...resultParams, fromQuiz: 'true' } });
             }
           });
         } else {

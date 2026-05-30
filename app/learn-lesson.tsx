@@ -275,7 +275,7 @@ export default function LearnLessonScreen() {
   const blankColor = selected !== null
     ? (selected === step?.correctIdx ? '#22C55E' : '#FF4B4B')
     : (level?.color ?? Colors.primaryGlow);
-  const sentenceParts = step?.sentence?.split('___') ?? ['', ''];
+  const sentenceParts = ['', ''];
 
   return (
     <SafeAreaView style={[styles.safe, { backgroundColor: colors.background }]}>
