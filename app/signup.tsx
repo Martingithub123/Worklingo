@@ -10,7 +10,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useApp } from '@/context/AppContext';
 import { getStrings } from '@/constants/i18n';
 import { Radius, FontSize } from '@/constants/theme';
-import { Eye, EyeOff, Mail, Lock, User } from 'lucide-react-native';
+import { Eye, EyeOff, Mail, Lock, User, Check } from 'lucide-react-native';
 
 const { width, height } = Dimensions.get('window');
 
@@ -25,6 +25,7 @@ export default function SignUpScreen() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [cooldown, setCooldown] = useState(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const mascotOp = useRef(new Animated.Value(0)).current;
   const mascotSc = useRef(new Animated.Value(0.8)).current;
@@ -72,6 +73,9 @@ export default function SignUpScreen() {
     }
     if (!/[0-9]/.test(password)) {
       setError('Password must contain at least one number.'); return;
+    }
+    if (!agreedToTerms) {
+      setError('Please accept the Terms & Conditions to continue.'); return;
     }
     setLoading(true); setError('');
     const { error } = await signUp(email.trim(), password, name.trim());
@@ -179,6 +183,27 @@ export default function SignUpScreen() {
 
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
+            {/* Terms acceptance */}
+            <TouchableOpacity
+              style={styles.termsRow}
+              onPress={() => setAgreedToTerms(v => !v)}
+              activeOpacity={0.7}
+            >
+              <View style={[styles.checkbox, agreedToTerms && styles.checkboxChecked]}>
+                {agreedToTerms && <Check size={12} color="#0B1A08" strokeWidth={3} />}
+              </View>
+              <Text style={styles.termsText}>
+                I agree to the{' '}
+                <Text style={styles.termsLink} onPress={() => router.push('/terms' as any)}>
+                  Terms & Conditions
+                </Text>
+                {' '}and{' '}
+                <Text style={styles.termsLink} onPress={() => router.push('/terms' as any)}>
+                  Privacy Policy
+                </Text>
+              </Text>
+            </TouchableOpacity>
+
             {/* Sign up button */}
             <Animated.View style={{ transform: [{ scale: btnScale }] }}>
               <TouchableOpacity
@@ -281,5 +306,26 @@ const styles = StyleSheet.create({
   secondaryBtnText: {
     fontSize: 13, fontFamily: 'Poppins-Bold',
     color: '#5ED82B', letterSpacing: 1,
+  },
+  termsRow: {
+    flexDirection: 'row', alignItems: 'flex-start', gap: 10,
+  },
+  checkbox: {
+    width: 20, height: 20, borderRadius: 5, borderWidth: 1.5,
+    borderColor: 'rgba(255,255,255,0.35)',
+    alignItems: 'center', justifyContent: 'center',
+    marginTop: 1,
+    backgroundColor: 'transparent',
+  },
+  checkboxChecked: {
+    backgroundColor: '#5ED82B',
+    borderColor: '#5ED82B',
+  },
+  termsText: {
+    flex: 1, fontSize: 12, fontFamily: 'Poppins-Regular',
+    color: 'rgba(255,255,255,0.55)', lineHeight: 18,
+  },
+  termsLink: {
+    color: '#5ED82B', fontFamily: 'Poppins-SemiBold',
   },
 });

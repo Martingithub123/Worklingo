@@ -9,7 +9,7 @@ import { useApp } from '@/context/AppContext';
 import { Colors, Spacing, Radius, FontSize } from '@/constants/theme';
 import { ChevronLeft, FileText } from 'lucide-react-native';
 
-const LAST_UPDATED = 'May 14, 2025';
+const LAST_UPDATED = 'May 30, 2026';
 
 interface Section {
   title: string;
@@ -147,7 +147,7 @@ export default function TermsScreen() {
         {/* Footer */}
         <View style={[styles.footer, { borderTopColor: colors.cardBorder }]}>
           <Text style={[styles.footerText, { color: colors.textMuted }]}>
-            © 2025 FluentBee. All rights reserved.
+            © 2026 FluentBee. All rights reserved.
           </Text>
         </View>
       </Animated.ScrollView>
