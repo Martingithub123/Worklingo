@@ -17,6 +17,8 @@ import { AuthProvider, useAuth } from '@/context/AuthContext';
 import { syncService } from '@/services/syncService';
 import { dataService } from '@/services/dataService';
 import { supabase } from '@/lib/supabase';
+import { notificationService } from '@/services/notificationService';
+import * as Notifications from 'expo-notifications';
 
 const PROTECTED_SEGMENTS = new Set([
   'settings',
@@ -62,6 +64,17 @@ export default function RootLayout() {
     dataService.init();
   }, []);
 
+  // Schedule daily reminders on app open + handle notification taps
+  useEffect(() => {
+    notificationService.onAppOpen();
+
+    // Navigate to the right screen when user taps a notification
+    const sub = Notifications.addNotificationResponseReceivedListener(() => {
+      // Notification tap — app already opened, nothing extra needed
+    });
+    return () => sub.remove();
+  }, []);
+
   // Sync offline progress queue whenever app comes back to foreground
   const appState = useRef(AppState.currentState);
   useEffect(() => {
@@ -71,6 +84,8 @@ export default function RootLayout() {
         if (session?.user) {
           syncService.flush();
         }
+        // Reschedule reminders when app comes back to foreground
+        notificationService.onAppOpen();
       }
       appState.current = next;
     });

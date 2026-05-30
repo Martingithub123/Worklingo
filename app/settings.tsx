@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View, Text, StyleSheet, TouchableOpacity,
-  ScrollView, Linking, Alert,
+  ScrollView, Linking, Alert, Switch,
 } from 'react-native';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,8 +12,9 @@ import { getStrings } from '@/constants/i18n';
 import { Colors, Spacing, Radius, FontSize } from '@/constants/theme';
 import {
   ChevronLeft, ChevronRight, User, Star,
-  Globe, FileText, Mail, LogOut, Smartphone,
+  Globe, FileText, Mail, LogOut, Smartphone, Bell,
 } from 'lucide-react-native';
+import { notificationService } from '@/services/notificationService';
 
 const APP_VERSION = '1.0.0';
 const SUPPORT_EMAIL = 'support@fluentbee.app';
@@ -21,6 +22,16 @@ const SUPPORT_EMAIL = 'support@fluentbee.app';
 export default function SettingsScreen() {
   const { uiLanguage, colors } = useApp();
   const { user, signOut } = useAuth();
+  const [notificationsOn, setNotificationsOn] = useState(true);
+
+  const toggleNotifications = async (val: boolean) => {
+    setNotificationsOn(val);
+    if (val) {
+      await notificationService.scheduleDailyReminder(20, 0, uiLanguage);
+    } else {
+      await notificationService.cancelAll();
+    }
+  };
   const t = getStrings(uiLanguage);
 
   const displayName = user?.user_metadata?.full_name ?? user?.email?.split('@')[0] ?? '—';
@@ -118,6 +129,30 @@ export default function SettingsScreen() {
             colors={colors}
             last
           />
+        </View>
+
+        {/* Notifications */}
+        <SectionLabel label="Notifications" colors={colors} />
+        <View style={[styles.group, { backgroundColor: colors.card, borderColor: colors.cardBorder }]}>
+          <View style={[styles.row, styles.rowFirst, styles.rowLast]}>
+            <View style={styles.rowLeft}>
+              <View style={[styles.rowIcon, { backgroundColor: colors.surface }]}>
+                <Bell size={18} color={colors.textSecondary} strokeWidth={2} />
+              </View>
+              <View>
+                <Text style={[styles.rowLabel, { color: colors.text }]}>Daily reminders</Text>
+                <Text style={[styles.rowSublabel, { color: colors.textSecondary }]}>
+                  {notificationsOn ? 'Every day at 8:00 PM' : 'Off'}
+                </Text>
+              </View>
+            </View>
+            <Switch
+              value={notificationsOn}
+              onValueChange={toggleNotifications}
+              trackColor={{ false: colors.cardBorder, true: Colors.primaryGlow }}
+              thumbColor="#fff"
+            />
+          </View>
         </View>
 
         {/* App */}
@@ -257,6 +292,13 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row', alignItems: 'center', gap: 12,
     paddingHorizontal: Spacing.md, paddingVertical: 14,
+  },
+  rowFirst: {},
+  rowLast: {},
+  rowLeft: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 12 },
+  rowIcon: {
+    width: 34, height: 34, borderRadius: 10,
+    alignItems: 'center', justifyContent: 'center',
   },
   rowIconWrap: {
     width: 34, height: 34, borderRadius: 10,
