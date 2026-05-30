@@ -7,7 +7,8 @@ dist/
 web-build/
 expo-env.d.ts
 
-# native
+# native generated folders (EAS uses CNG/Prebuild to regenerate these)
+/android
 *.orig.*
 *.jks
 *.p8
