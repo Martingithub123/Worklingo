@@ -40,8 +40,10 @@
     },
     "extra": {
       "eas": {
-        "projectId": ""
-      }
-    }
+        "projectId": "e71517fa-fc0e-47e2-8a84-5c4a3bbffc1a"
+      },
+      "router": {}
+    },
+    "owner": "iris417"
   }
 }
