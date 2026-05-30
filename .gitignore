@@ -9,6 +9,7 @@ expo-env.d.ts
 
 # native generated folders (EAS uses CNG/Prebuild to regenerate these)
 /android
+/ios
 *.orig.*
 *.jks
 *.p8
